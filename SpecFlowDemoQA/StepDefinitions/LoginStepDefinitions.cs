@@ -12,51 +12,43 @@ namespace SpecFlowDemoQA.StepDefinitions
     [Collection("Chrome Driver")]
     public class LoginStepDefinitions
     {
-
         private IWebDriver driver;
-        private LoginPage loginPage;
-        WebDriverWait wait;
+        private LoginLogic loginLogic;
 
         public LoginStepDefinitions(TestFixture fixture)
         {
             driver = fixture.driver;
-            loginPage = new LoginPage(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            loginLogic = new LoginLogic(fixture);
         }
 
         [Given(@"que estou no site")]
-        public void GivenQueNaoEstouLogadoNoSite()
+        public void GivenQueEstouNoSite()
         {
-            loginPage.AbrirSite();
+            loginLogic.EntrarNoSite();
         }
 
         [When(@"clico em login")]
         public void WhenClicoEmLogin()
         {
-            IWebElement BtnLogin = wait.Until(d => d.FindElement(loginPage.btnLogin));
-            BtnLogin.Click();
+            loginLogic.ClicarBtnLogin();
         }
 
-        [When(@"preencho usuario de login")]
-        public void WhenPreenchoUsuarioDeLogin()
+        [When(@"preencho usuario valido de login")]
+        public void WhenPreenchoUsuarioValidoDeLogin()
         {
-            var UserName = wait.Until(e => e.FindElement(loginPage.txtUser));            
-            UserName.SendKeys("JOAOQA22");
-            
+            loginLogic.PreencherUsuarioValidoDeLogin();
         }
 
-        [When(@"preencho senha de login")]
-        public void WhenPreenchoSenhaDeLogin()
+        [When(@"preencho senha valida de login")]
+        public void WhenPreenchoSenhaValidaDeLogin()
         {
-            var Password = wait.Until(e => e.FindElement(loginPage.txtSenha));
-            Password.SendKeys("Senha@123456");
+            loginLogic.PreencherSenhaValidaDeLogin();
         }
 
         [Then(@"valido que estou logado no site")]
         public void ThenValidoQueEstouLogadoNoSite()
         {
-            bool Logado = wait.Until(e => e.FindElement(loginPage.BtnLogOut).Displayed);
-            Assert.True(Logado);
+            loginLogic.ValidarLoginEfetuado();
         }
     }
 }

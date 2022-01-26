@@ -117,10 +117,10 @@ testRunner.Given("que estou no site", ((string)(null)), ((TechTalk.SpecFlow.Tabl
 testRunner.When("clico em login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 10
-testRunner.And("preencho usuario de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+testRunner.And("preencho usuario valido de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 11
-testRunner.And("preencho senha de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+testRunner.And("preencho senha valida de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 12
 testRunner.And("clico em login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
