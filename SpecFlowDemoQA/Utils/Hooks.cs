@@ -29,8 +29,9 @@ namespace SpecFlowDemoQA.Utils
         public void AfterScenario()
         {
             terminal.WriteLine("--Finalizando automação--");
-            terminal.WriteLine($"--Status:{cenario.ScenarioExecutionStatus}");         
-            pdfUtil.exportarPDF(@"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\test.pdf");
+            terminal.WriteLine($"--Status:{cenario.ScenarioExecutionStatus}");        
+            pdfUtil.exportarPDF();
+            
         }
 
     }

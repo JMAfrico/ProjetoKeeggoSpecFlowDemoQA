@@ -10,6 +10,9 @@ using iText.Layout.Element;
 using System.Drawing;
 using iText.Layout.Properties;
 using iText.Kernel.Colors;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Kernel.Pdf.Canvas.Draw;
 
 namespace SpecFlowDemoQA.Utils
 {
@@ -21,17 +24,25 @@ namespace SpecFlowDemoQA.Utils
             this.cenario = cenario;
         }
 
-        public Document exportarPDF(string caminho)
+        public Document exportarPDF()
         {
-            using (PdfWriter pdfw = new PdfWriter(caminho, new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
+            string data = DateTime.Now.ToString("dd-MM-yy");
+            string hora = DateTime.Now.ToString("HH-mm-ss");
+            string argumentosNomePDF = data + "-" + hora + "-" + cenario.ScenarioInfo.Title;
+            string caminho = nomeadorCenario(cenario);
+
+            using (PdfWriter pdfw = new PdfWriter(caminho+argumentosNomePDF+".pdf", new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
             {              
                 var pdfdocument = new PdfDocument(pdfw);
-
                 var document = new iText.Layout.Document(pdfdocument, PageSize.A4);
-
+         
                 document.Add(cabecalho());
+                document.Add(automatizador());
+                document.Add(DataHora());
+                document.Add(new LineSeparator(new SolidLine()));
                 document.Add(nomeCenario(cenario));
                 document.Add(statusCenario(cenario));
+                document.Add(new LineSeparator(new SolidLine()));
 
                 document.Close();
                 pdfdocument.Close();
@@ -42,13 +53,26 @@ namespace SpecFlowDemoQA.Utils
 
         private Paragraph cabecalho()
         {
-            Paragraph header = new Paragraph("EVIDENCIAS DEMOQA").SetTextAlignment(TextAlignment.CENTER).SetFontSize(20);
+            Paragraph header = new Paragraph("Evidencias DemoQA").SetTextAlignment(TextAlignment.CENTER).SetFontSize(17);
             return header;
+        }
+
+        private Paragraph automatizador()
+        {
+            Paragraph nome = new Paragraph("Automatizador : João Marcos").SetTextAlignment(TextAlignment.LEFT).SetFontSize(15).SetOpacity(50);
+            return nome;
+        }
+
+        private Paragraph DataHora()
+        {
+            string data = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            Paragraph datahora = new Paragraph("Data: "+data).SetTextAlignment(TextAlignment.LEFT).SetFontSize(14).SetOpacity(50);
+            return datahora;
         }
 
         private Paragraph nomeCenario(ScenarioContext cenario)
         {         
-            Paragraph nomeCenario = new Paragraph("Cenário: " +cenario.ScenarioInfo.Title).SetTextAlignment(TextAlignment.LEFT).SetFontSize(16);
+            Paragraph nomeCenario = new Paragraph("CENÁRIO : " +(cenario.ScenarioInfo.Title).ToUpper()).SetTextAlignment(TextAlignment.CENTER).SetFontSize(16);
             return nomeCenario;
         }
 
@@ -57,7 +81,7 @@ namespace SpecFlowDemoQA.Utils
             Paragraph status = new Paragraph();
             if (cenario.ScenarioExecutionStatus == ScenarioExecutionStatus.OK)
             {
-                status = new Paragraph("Status:" + cenario.ScenarioExecutionStatus).SetTextAlignment(TextAlignment.LEFT).SetFontSize(16)
+                status = new Paragraph("STATUS:" + cenario.ScenarioExecutionStatus).SetTextAlignment(TextAlignment.LEFT).SetFontSize(16)
                     .SetBackgroundColor(ColorConstants.GREEN);
                 return status;
             }
@@ -76,72 +100,38 @@ namespace SpecFlowDemoQA.Utils
             }
         }
 
+        private string nomeadorCenario(ScenarioContext cenario)
+        {
+            string data = DateTime.Now.ToString("dd-MM-yy");
+            string hora = DateTime.Now.ToString("HH-mm-ss");
+            
+            string caminhoPadrao = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + data + "\\";
 
-        //using (PdfWriter writer = new PdfWriter(dt))
-        //
-        //
-        // System.IO.FileStream fs = new FileStream(strPDF, FileMode.Create, FileAccess.Write, FileShare.None);
-        // Document doc = new Document();
-        // doc.s(iTextSharp.text.PageSize.A2);
-        // PdfWriter writer = PdfWriter.GetInstance(doc, fs);
-        // doc.Open();
-        //
-        // //CABEÇALHO
-        // BaseFont bfnHead = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-        // iTextSharp.text.Font fntHead = new iTextSharp.text.Font(bfnHead, 22, 1, iTextSharp.text.BaseColor.BLACK);
-        // Paragraph paragrafo = new Paragraph();
-        // paragrafo.Alignment = Element.ALIGN_CENTER;
-        // paragrafo.Add(new Chunk(strHead.ToUpper(), fntHead));
-        // doc.Add(paragrafo);
-        //
-        // //DADOS
-        // Paragraph autor = new Paragraph();
-        // BaseFont bfnAutor = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-        // iTextSharp.text.Font Fontautor = new iTextSharp.text.Font(bfnHead, 16, 1, iTextSharp.text.BaseColor.GRAY);
-        // autor.Alignment = Element.ALIGN_LEFT;
-        // autor.Add(new Chunk("Autor : JOAO MARCOS", Fontautor));
-        // //autor.Add(new Chunk("\nCliente : " + lbl_nome_cliente.Text, Fontautor));
-        // autor.Add(new Chunk("\nData do Relatório:" + DateTime.Now, Fontautor));
-        // //autor.Add(new Chunk("\nTotal:" + lbl_total_geral.Text, Fontautor));
-        // autor.Add(new Chunk("\nQuantidade compras:" + dt_compras_efetuadas.RowCount, Fontautor));
-        // autor.Add(new Chunk("\nTotal :" + lbl_TotalDasCompras.Text, Fontautor));
-        //
-        // autor.Add(new Chunk(" " + "", Fontautor));
-        // doc.Add(autor);
-        //
-        // //
-        // doc.Add(new Chunk("\n", fntHead));
-        //
-        // //TABELA
-        // PdfPTable pdfTable = new PdfPTable(dt_compras_efetuadas.ColumnCount);
-        // pdfTable.DefaultCell.Padding = 3;
-        // pdfTable.WidthPercentage = 50;
-        // pdfTable.HorizontalAlignment = Element.ALIGN_JUSTIFIED;
-        // pdfTable.DefaultCell.BorderWidth = 1;
-        //
-        // foreach (DataGridViewColumn column in dt_compras_efetuadas.Columns)
-        // {
-        //     PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
-        //     cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
-        //     pdfTable.AddCell(cell);
-        //
-        // }
-        //
-        // //Adding DataRow
-        // foreach (DataGridViewRow row in dt_compras_efetuadas.Rows)
-        // {
-        //     foreach (DataGridViewCell cell in row.Cells)
-        //     {
-        //         pdfTable.AddCell(cell.Value.ToString());
-        //     }
-        // }
-        //
-        // doc.Add(pdfTable);
-        // doc.Close();
-        // writer.Close();
-        // fs.Close();
-        //
-        //
+            if (!Directory.Exists(caminhoPadrao))
+            {
+                Directory.CreateDirectory(caminhoPadrao);
+            }
+
+            string caminhoStatusPassed = caminhoPadrao + "Passed\\";
+            string caminhoStatusFailed = caminhoPadrao + "Failed\\";
+            if (cenario.ScenarioExecutionStatus == ScenarioExecutionStatus.OK)
+            {
+                if (!Directory.Exists(caminhoStatusPassed))
+                {
+                    Directory.CreateDirectory(caminhoStatusPassed);
+                }
+                return caminhoStatusPassed;
+            }
+            else
+            {
+                if (!Directory.Exists(caminhoStatusFailed))
+                {
+                    Directory.CreateDirectory(caminhoStatusFailed);
+                }
+                return caminhoStatusFailed;
+            }
+
+        }
     }
     
 }
