@@ -18,15 +18,9 @@ namespace SpecFlowDemoQA.StepDefinitions
         public LoginStepDefinitions(TestFixture fixture)
         {
             driver = fixture.driver;
-            loginLogic = new LoginLogic(fixture);
-        }
-
-        [Given(@"que estou no site")]
-        public void GivenQueEstouNoSite()
-        {
-            loginLogic.EntrarNoSite();
-        }
-
+            loginLogic = new LoginLogic(fixture);       
+        }      
+        
         [When(@"clico em login")]
         public void WhenClicoEmLogin()
         {
@@ -50,5 +44,25 @@ namespace SpecFlowDemoQA.StepDefinitions
         {
             loginLogic.ValidarLoginEfetuado();
         }
+
+        [When(@"preencho usuario invalido de login")]
+        public void WhenPreenchoUsuarioInvalidoDeLogin()
+        {
+            loginLogic.PreencherUsuarioInvalidoDeLogin();
+        }
+
+        [When(@"preencho senha invalida de login")]
+        public void WhenPreenchoSenhaInvalidaDeLogin()
+        {
+            loginLogic.PreencherSenhaInvalidaDeLogin();
+        }
+
+        [Then(@"valido que nao estou logado no site")]
+        public void ThenValidoQueNaoEstouLogadoNoSite()
+        {
+            loginLogic.ValidoLoginSenhaOuUsuarioInvalido();
+        }
+
+
     }
 }

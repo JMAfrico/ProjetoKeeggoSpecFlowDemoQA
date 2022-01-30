@@ -43,6 +43,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[27.2.1, )"
+            },
+            "ExtentReports": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "FluentAssertions": {
               "target": "Package",
               "version": "[6.2.0, )"
@@ -66,6 +74,14 @@
             "SpecFlow.xUnit": {
               "target": "Package",
               "version": "[3.9.40, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[7.2.1, )"
             },
             "xunit": {
               "target": "Package",

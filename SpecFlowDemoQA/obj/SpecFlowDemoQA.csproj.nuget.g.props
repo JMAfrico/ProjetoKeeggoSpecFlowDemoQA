@@ -27,5 +27,6 @@
     <PkgValidation Condition=" '$(PkgValidation)' == '' ">C:\Users\joao.africo\.nuget\packages\validation\2.4.18</PkgValidation>
     <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\joao.africo\.nuget\packages\xunit.analyzers\0.10.0</Pkgxunit_analyzers>
     <PkgBoDi Condition=" '$(PkgBoDi)' == '' ">C:\Users\joao.africo\.nuget\packages\bodi\1.5.0</PkgBoDi>
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\joao.africo\.nuget\packages\microsoft.codeanalysis.analyzers\1.1.0</PkgMicrosoft_CodeAnalysis_Analyzers>
   </PropertyGroup>
 </Project>

@@ -8,25 +8,23 @@ using System.Threading.Tasks;
 namespace SpecFlowDemoQA.Pages
 {
     public class LoginPage
-    {
+    {      
         private IWebDriver driver;
-        public By btnLogin { get; private set; }
-        public By txtUser { get; private set; }
-        public By txtSenha { get; private set; }
+        public By BtnLogin { get; private set; }
+        public By TxtUser { get; private set; }
+        public By TxtSenha { get; private set; }
         public By BtnLogOut { get; private set; }
+
+        public By LblInvalidoLoginOuSenha { get; private set; }
 
         public LoginPage(IWebDriver driver)
         {
             this.driver = driver;
-            btnLogin = By.XPath("//button[@id='login']");
-            txtUser = By.XPath("//input[@id='userName']");
-            txtSenha = By.XPath("//input[@id='password']");
+            BtnLogin = By.XPath("//button[@id='login']");
+            TxtUser = By.XPath("//input[@id='userName']");
+            TxtSenha = By.XPath("//input[@id='password']");
             BtnLogOut = By.XPath("//button[contains(text(), 'Log out')]");
-        }
-        public void AbrirSite()
-        {
-            driver.Navigate().GoToUrl("https://demoqa.com/books");
-            driver.Manage().Window.Maximize();
+            LblInvalidoLoginOuSenha = By.XPath("//p[contains(text(),'Invalid username or password!')]");
         }
     }
 }
