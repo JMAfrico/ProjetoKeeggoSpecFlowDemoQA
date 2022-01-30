@@ -13,15 +13,21 @@ using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.IO.Font.Constants;
 using iText.Kernel.Pdf.Canvas.Draw;
+using OpenQA.Selenium;
+using Image = iText.Layout.Element.Image;
+using iText.IO.Image;
+using System.Drawing.Imaging;
 
 namespace SpecFlowDemoQA.Utils
 {
     public class PDFUtil
     {
         ScenarioContext cenario;
+
         public PDFUtil(ScenarioContext cenario)
         {
             this.cenario = cenario;
+
         }
 
         public Document exportarPDF()
@@ -30,12 +36,20 @@ namespace SpecFlowDemoQA.Utils
             string hora = DateTime.Now.ToString("HH-mm-ss");
             string argumentosNomePDF = data + "-" + hora + "-" + cenario.ScenarioInfo.Title;
             string caminho = nomeadorCenario(cenario);
+            
+
 
             using (PdfWriter pdfw = new PdfWriter(caminho+argumentosNomePDF+".pdf", new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
-            {              
+            {
+                Image imagem = adicionarImagensNoPDF();
                 var pdfdocument = new PdfDocument(pdfw);
                 var document = new iText.Layout.Document(pdfdocument, PageSize.A4);
-         
+
+                //Byte[] byteArray = ((ITakesScreenshot)driver).GetScreenshot().AsByteArray;
+                //Image img = new Image(ImageDataFactory.Create(byteArray)).SetTextAlignment(TextAlignment.CENTER);
+                //Bitmap screenshot = new Bitmap(new MemoryStream(byteArray));
+                //screenshot.Save(string.Format(caminho + argumentosNomePDF + ".pdf", ImageFormat.Jpeg));
+
                 document.Add(cabecalho());
                 document.Add(automatizador());
                 document.Add(DataHora());
@@ -43,6 +57,7 @@ namespace SpecFlowDemoQA.Utils
                 document.Add(nomeCenario(cenario));
                 document.Add(statusCenario(cenario));
                 document.Add(new LineSeparator(new SolidLine()));
+                document.Add(imagem);
 
                 document.Close();
                 pdfdocument.Close();
@@ -131,6 +146,15 @@ namespace SpecFlowDemoQA.Utils
                 return caminhoStatusFailed;
             }
 
+        }
+
+        private Image adicionarImagensNoPDF()
+         {
+            // Add image
+            Image img = new Image(ImageDataFactory
+               .Create(@"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\2022-01-30\\2022-01-30-18-43-49-388.jpg"))
+               .SetTextAlignment(TextAlignment.CENTER);
+                return img;
         }
     }
     

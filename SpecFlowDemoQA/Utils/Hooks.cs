@@ -10,6 +10,7 @@ namespace SpecFlowDemoQA.Utils
         private ITestOutputHelper terminal { get; set; }
         PDFUtil pdfUtil;
         ScenarioContext cenario;
+
         public Hooks(ITestOutputHelper terminal, ScenarioContext cenario)
         {
             this.terminal = terminal;   
@@ -33,6 +34,5 @@ namespace SpecFlowDemoQA.Utils
             pdfUtil.exportarPDF();
             
         }
-
     }
 }
