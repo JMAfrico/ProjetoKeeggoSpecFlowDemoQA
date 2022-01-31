@@ -14,11 +14,13 @@ namespace SpecFlowDemoQA.StepDefinitions
     {
         private IWebDriver driver;
         private LoginLogic loginLogic;
+        private ScenarioContext cenarioContext;
 
-        public LoginStepDefinitions(TestFixture fixture)
+        public LoginStepDefinitions(TestFixture fixture, ScenarioContext cenarioContext)
         {
+            this.cenarioContext = cenarioContext;
             driver = fixture.driver;
-            loginLogic = new LoginLogic(fixture);       
+            loginLogic = new LoginLogic(fixture,cenarioContext);       
         }      
         
         [When(@"clico em login")]
@@ -62,7 +64,5 @@ namespace SpecFlowDemoQA.StepDefinitions
         {
             loginLogic.ValidoLoginSenhaOuUsuarioInvalido();
         }
-
-
     }
 }

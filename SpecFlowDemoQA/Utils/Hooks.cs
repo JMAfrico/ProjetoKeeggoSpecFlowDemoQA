@@ -22,8 +22,7 @@ namespace SpecFlowDemoQA.Utils
         public void BeforeScenario()
         {
             terminal.WriteLine("--Iniciando automação--");
-            terminal.WriteLine($"--Cenário:{cenario.ScenarioInfo.Title}--");
-            
+            terminal.WriteLine($"--Cenário:{cenario.ScenarioInfo.Title}--");          
         }
 
         [AfterScenario]
@@ -32,7 +31,7 @@ namespace SpecFlowDemoQA.Utils
             terminal.WriteLine("--Finalizando automação--");
             terminal.WriteLine($"--Status:{cenario.ScenarioExecutionStatus}");        
             pdfUtil.exportarPDF();
-            
+            pdfUtil.deletarPasta();         
         }
     }
 }

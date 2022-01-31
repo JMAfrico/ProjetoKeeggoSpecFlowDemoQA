@@ -17,12 +17,14 @@ namespace SpecFlowDemoQA.Logic
         private IWebDriver driver;
         private WebDriverWait wait;
         private ScreenShotUtil screenShotUtil;
-        public HomePageLogic(TestFixture testFixture)
+        private ScenarioContext cenarioContext;
+        public HomePageLogic(TestFixture testFixture, ScenarioContext cenarioContext)
         {
+            this.cenarioContext = cenarioContext;
             driver = testFixture.driver;
             homePage = new HomePage(driver);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            screenShotUtil = new ScreenShotUtil();
+            screenShotUtil = new ScreenShotUtil(cenarioContext);
         }
 
         public void NavegarParaHomePage()

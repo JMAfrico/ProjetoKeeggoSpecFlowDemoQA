@@ -18,15 +18,17 @@ namespace SpecFlowDemoQA.Logic
         private CSVHelper csvHelper;
         private IJavaScriptExecutor js;
         private ScreenShotUtil screenShotUtil;
+        private ScenarioContext cenarioContext;
 
-        public LoginLogic(TestFixture fixture)
+        public LoginLogic(TestFixture fixture, ScenarioContext cenarioContext)
         {
+            this.cenarioContext = cenarioContext;
             driver = fixture.driver;
             loginPage = new LoginPage(driver);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             csvHelper = new CSVHelper();
             js = (IJavaScriptExecutor)driver;
-            screenShotUtil = new ScreenShotUtil();
+            screenShotUtil = new ScreenShotUtil(cenarioContext);
         }
 
         public void ClicarBtnLogin()

@@ -27,8 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Evidences\" />
-    <Folder Include="Screenshoots\2022-01-27\" />
-    <Folder Include="Screenshoots\2022-01-28\" />
+    <Folder Include="Screenshoots\" />
   </ItemGroup>
 
 </Project>
