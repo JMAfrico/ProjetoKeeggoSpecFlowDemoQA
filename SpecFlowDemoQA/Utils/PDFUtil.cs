@@ -12,8 +12,9 @@ namespace SpecFlowDemoQA.Utils
 {
     public class PDFUtil
     {
-        ScenarioContext cenario;
-
+        private ScenarioContext cenario;
+       
+        
         public PDFUtil(ScenarioContext cenario)
         {
             this.cenario = cenario;
@@ -29,9 +30,9 @@ namespace SpecFlowDemoQA.Utils
 
             using (PdfWriter pdfw = new PdfWriter(caminho + argumentosNomePDF + ".pdf", new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
             {
-                Image[] imagem = adicionarImagensNoPDF();
+                Image[] imagem = adicionarImagensNoPDF();             
                 var pdfdocument = new PdfDocument(pdfw);             
-                var document = new iText.Layout.Document(pdfdocument, PageSize.A4);
+                var document = new Document(pdfdocument, PageSize.A4);
                 document.Add(cabecalho());
                 document.Add(automatizador());
                 document.Add(DataHora());
@@ -39,9 +40,9 @@ namespace SpecFlowDemoQA.Utils
                 document.Add(nomeCenario(cenario));
                 document.Add(statusCenario(cenario));
                 document.Add(new LineSeparator(new SolidLine()));
-                for(int i = 0; i < imagem.Length; i++)
-                {
-                    document.Add(imagem[i]);
+                for (int i = 0; i < imagem.Length; i++)
+                {                 
+                    document.Add(imagem[i]);                    
                 }
                 document.Close();
                 pdfdocument.Close();
@@ -67,7 +68,7 @@ namespace SpecFlowDemoQA.Utils
             Paragraph datahora = new Paragraph("Data: "+data).SetTextAlignment(TextAlignment.LEFT).SetFontSize(14).SetOpacity(50);
             return datahora;
         }
-
+        
         private Paragraph nomeCenario(ScenarioContext cenario)
         {         
             Paragraph nomeCenario = new Paragraph("CENÁRIO : " +(cenario.ScenarioInfo.Title).ToUpper()).SetTextAlignment(TextAlignment.CENTER).SetFontSize(16);
@@ -139,12 +140,11 @@ namespace SpecFlowDemoQA.Utils
             string nomePasta = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\";
             string[] itens = Directory.GetFiles(nomePasta);
             Image[] images = new Image[itens.Length];
-
-            for(int i = 0; i < itens.Length;i++)
+            
+            for (int i = 0; i < itens.Length;i++)
             {
-                images[i] = new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER);
+                images[i] = new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER);         
             }
-
             for (int i = 0; i < itens.Length;)
             {
                 return images;
@@ -157,6 +157,7 @@ namespace SpecFlowDemoQA.Utils
             string data = DateTime.Now.ToString("yyyy-MM-dd");
             Directory.Delete(@"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\", true);
         }
+
 
     }
     

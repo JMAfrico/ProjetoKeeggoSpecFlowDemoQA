@@ -30,6 +30,7 @@ namespace SpecFlowDemoQA.Utils
             {
                 Directory.CreateDirectory(caminhoPadrao);
             }
+
             string fileName = caminhoPadrao + data + "-" + hora + ".jpg";
             Byte[] byteArray = ((ITakesScreenshot)driver).GetScreenshot().AsByteArray;
             Bitmap screenshot = new Bitmap(new MemoryStream(byteArray));

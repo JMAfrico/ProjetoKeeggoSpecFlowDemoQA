@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using Xunit.Abstractions;
 
@@ -11,27 +12,51 @@ namespace SpecFlowDemoQA.Utils
         PDFUtil pdfUtil;
         ScenarioContext cenario;
 
+
         public Hooks(ITestOutputHelper terminal, ScenarioContext cenario)
         {
             this.terminal = terminal;   
             this.cenario = cenario;
-            pdfUtil = new PDFUtil(cenario);
+            pdfUtil = new PDFUtil(cenario) ;
         }
 
         [BeforeScenario]
         public void BeforeScenario()
         {
-            terminal.WriteLine("--Iniciando automação--");
-            terminal.WriteLine($"--Cenário:{cenario.ScenarioInfo.Title}--");          
+            try
+            {
+                terminal.WriteLine("--Iniciando automação--");
+                terminal.WriteLine($"--Cenário:{cenario.ScenarioInfo.Title}--");
+            }catch (Exception ex)
+            {
+                throw new Exception("Erro"+ex.Message);
+            }
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            terminal.WriteLine("--Finalizando automação--");
-            terminal.WriteLine($"--Status:{cenario.ScenarioExecutionStatus}");        
-            pdfUtil.exportarPDF();
-            pdfUtil.deletarPasta();         
+            try
+            {
+                terminal.WriteLine("--Finalizando automação--");
+                terminal.WriteLine($"--Status:{cenario.ScenarioExecutionStatus}");
+                pdfUtil.exportarPDF();       
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro"+ex.Message);
+            }
+            finally
+            {
+                pdfUtil.deletarPasta();
+            }
         }
+
+        [BeforeStep]
+        public void BeforeStep()
+        {
+            terminal.WriteLine(cenario.StepContext.StepInfo.Text);
+        }
+
     }
 }

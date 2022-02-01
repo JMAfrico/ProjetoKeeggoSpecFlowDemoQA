@@ -19,6 +19,7 @@ namespace SpecFlowDemoQA.Logic
         private IJavaScriptExecutor js;
         private ScreenShotUtil screenShotUtil;
         private ScenarioContext cenarioContext;
+        private ExtentReports extent;
 
         public LoginLogic(TestFixture fixture, ScenarioContext cenarioContext)
         {
@@ -29,6 +30,7 @@ namespace SpecFlowDemoQA.Logic
             csvHelper = new CSVHelper();
             js = (IJavaScriptExecutor)driver;
             screenShotUtil = new ScreenShotUtil(cenarioContext);
+            extent = new ExtentReports();
         }
 
         public void ClicarBtnLogin()

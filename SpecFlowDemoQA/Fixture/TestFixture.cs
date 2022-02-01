@@ -19,7 +19,7 @@ namespace SpecFlowDemoQA.Fixture
         public TestFixture()
         {
             driver = new ChromeDriver(LocalDriver.PastaDoExecutavel);
-            extent = new ExtentReports();
+            extent = new ExtentReports();        
         }
         public void Dispose()
         {
