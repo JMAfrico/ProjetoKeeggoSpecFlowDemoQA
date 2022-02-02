@@ -11,15 +11,12 @@ namespace SpecFlowDemoQA.Logic
         private HomePage homePage;
         private IWebDriver driver;
         private WebDriverWait wait;
-        private ScreenShotUtil screenShotUtil;
-        private ScenarioContext cenarioContext;
-        public HomePageLogic(TestFixture testFixture, ScenarioContext cenarioContext)
+        public HomePageLogic(TestFixture testFixture)
         {
-            this.cenarioContext = cenarioContext;
+            
             driver = testFixture.driver;
             homePage = new HomePage(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            screenShotUtil = new ScreenShotUtil(cenarioContext);            
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));           
         }
 
         public void NavegarParaHomePage()
@@ -29,9 +26,9 @@ namespace SpecFlowDemoQA.Logic
 
         internal void VerificarOTiTuloDaPagina()
         {
-            string step = "Preencho usuário valido de Login";
+            string step = "Verifico o título da pagina";
             IWebElement txtHome = wait.Until(d => d.FindElement(homePage.txtSiteDemoQA));
-            screenShotUtil.TakesScreenshot(driver, txtHome);
+            ScreenShotUtil.TakesScreenshot(driver, txtHome, step);
 
         }
 
@@ -40,8 +37,8 @@ namespace SpecFlowDemoQA.Logic
             IWebElement txtHome = wait.Until(d => d.FindElement(homePage.txtSiteDemoQA));
             if (txtHome.Displayed)
             {
-                string step = "Preencho usuário valido de Login";
-                screenShotUtil.TakesScreenshot(driver, txtHome);
+                string step = "Valido a home Page";
+                ScreenShotUtil.TakesScreenshot(driver, txtHome, step);
                 Assert.True(txtHome.Displayed);
             }
             

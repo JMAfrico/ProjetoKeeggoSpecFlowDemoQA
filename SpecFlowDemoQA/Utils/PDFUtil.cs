@@ -7,7 +7,6 @@ using iText.Kernel.Colors;
 using iText.Kernel.Pdf.Canvas.Draw;
 using Image = iText.Layout.Element.Image;
 using iText.IO.Image;
-using OpenQA.Selenium;
 using SpecFlowDemoQA.Helpers;
 
 namespace SpecFlowDemoQA.Utils
@@ -15,28 +14,30 @@ namespace SpecFlowDemoQA.Utils
     public class PDFUtil
     {
         private ScenarioContext cenario;
-        private ScreenShotUtil ScreenShotUtil;
-        private IWebDriver driver;
-        private IWebElement element;
-
-        public PDFUtil(ScenarioContext cenario, IWebDriver driver, IWebElement element)
+        //private IWebDriver driver;
+        //private IWebElement element;
+        
+        public PDFUtil(ScenarioContext cenario)
         {
-            this.driver = driver;
-            this.element = element;
             this.cenario = cenario;
-            ScreenShotUtil = new ScreenShotUtil(cenario);
+            //this.driver = driver;
+            //this.element = element;
+            
         }
 
+        
         public Document exportarPDF()
         {
-            string arguments = DataHelper.DataAtual() + "-" + DataHelper.HoraAtual() + "-" + cenario.ScenarioInfo.Title +".pdf";
+            string arguments = DataHelper.GetDataAtual() + "-" + DataHelper.GetHoraAtual() + "-" + cenario.ScenarioInfo.Title ;
             string fileEvidences = FileEvidences(cenario);
-            Dictionary<Image, string> images = img(driver, element);
+            
 
-            using (PdfWriter pdfw = new PdfWriter(fileEvidences + arguments, new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
+            using (PdfWriter pdfw = new PdfWriter(fileEvidences + arguments + ".pdf", new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
             {
                 var pdfdocument = new PdfDocument(pdfw);
                 var document = new Document(pdfdocument, PageSize.A4);
+                Dictionary<Image, string> images = AddImagensPDF();
+
                 document.Add(cabecalho());
                 document.Add(automatizador());
                 document.Add(DataHora());
@@ -47,7 +48,8 @@ namespace SpecFlowDemoQA.Utils
                 foreach (KeyValuePair<Image, string> item in images)
                 {
                     document.Add(item.Key);
-                    document.Add(new Paragraph(item.Value));     
+                    document.Add(new Paragraph());
+                    document.Add(new Paragraph(item.Value).SetFontColor(ColorConstants.RED));
                 }           
                 document.Close();
                 pdfdocument.Close();
@@ -107,71 +109,57 @@ namespace SpecFlowDemoQA.Utils
         private string FileEvidences(ScenarioContext cenario)
         {           
             
-            if (!Directory.Exists(DataHelper.CaminhoEvidencias()))
+            if (!Directory.Exists(DataHelper.GetCaminhoEvidencias()))
             {
-                Directory.CreateDirectory(DataHelper.CaminhoEvidencias());
+                Directory.CreateDirectory(DataHelper.GetCaminhoEvidencias());
             }
 
             if (cenario.ScenarioExecutionStatus == ScenarioExecutionStatus.OK)
             {
-                if (!Directory.Exists(DataHelper.CaminhoStatusPassed()))
+                if (!Directory.Exists(DataHelper.GetCaminhoStatusPassed()))
                 {
-                    Directory.CreateDirectory(DataHelper.CaminhoStatusPassed());
+                    Directory.CreateDirectory(DataHelper.GetCaminhoStatusPassed());
                 }
-                return DataHelper.CaminhoStatusPassed();
+                return DataHelper.GetCaminhoStatusPassed();
             }
             else
             {
-                if (!Directory.Exists(DataHelper.CaminhoStatusFailed()))
+                if (!Directory.Exists(DataHelper.GetCaminhoStatusFailed()))
                 {
-                    Directory.CreateDirectory(DataHelper.CaminhoStatusFailed());
+                    Directory.CreateDirectory(DataHelper.GetCaminhoStatusFailed());
                 }
-                return DataHelper.CaminhoStatusFailed();
+                return DataHelper.GetCaminhoStatusFailed();
             }
-        }
-
-        private Image[] adicionarImagensNoPDF()
-        {
-
-            string data = DateTime.Now.ToString("dd-MM-yyyy");
-
-            string nomePasta = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\";
-            string[] itens = Directory.GetFiles(nomePasta);
-            Image[] images = new Image[itens.Length];
-            
-            for (int i = 0; i < itens.Length;i++)
-            {
-                images[i] = new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER);         
-            }
-            for (int i = 0; i < itens.Length;)
-            {
-                return images;
-            }
-            return null;
         }
 
         public void deletarPasta()
         {
-            string data = DateTime.Now.ToString("dd-MM-yyyy");
-            Directory.Delete(@"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\", true);
+            Directory.Delete(DataHelper.GetCaminhoScreenshot(), true);
         }
 
-        public Dictionary<Image,string> img(IWebDriver driver, IWebElement element)
+        public Dictionary<Image, string> AddImagensPDF()
         {
-            Dictionary<Image, string> a = new Dictionary<Image, string>();
+            Dictionary<Image, string> listaDeImagens = new Dictionary<Image, string>();
 
-            string data = DateTime.Now.ToString("dd-MM-yyyy");
-
-            string nomePasta = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\";
-            string[] itens = Directory.GetFiles(nomePasta);
-            Image[] images = new Image[itens.Length];
+            string[] itens = Directory.GetFiles(DataHelper.GetCaminhoScreenshot());
+            string[] Steps = Directory.GetFileSystemEntries(DataHelper.GetCaminhoScreenshot());
 
             for (int i = 0; i < itens.Length; i++)
             {
-                a.Add(new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER),"teste");
+                int posicaoIndice = Steps[i].IndexOf('_');
+                int posicaoFinal = Steps[i].IndexOf(".jpg");
+                string posicaoStep = Steps[i].Substring(posicaoIndice + 1);
+                
+
+                listaDeImagens.Add(new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER), posicaoStep);
             }
-            return a;
-     
+            return listaDeImagens;
         }
+
+        static string GetStep(string step)
+        {
+            return step;
+        }
+
     }  
 }

@@ -9,13 +9,11 @@ namespace SpecFlowDemoQA.StepDefinitions
     {
         private IWebDriver driver;
         private HomePageLogic homePageLogic;
-        private ScenarioContext scenarioContext;
 
-        public HomePageStepDefinitions(TestFixture fixture, ScenarioContext cenarioContext)
+        public HomePageStepDefinitions(TestFixture fixture)
         {   
-            scenarioContext = cenarioContext;
             driver = fixture.driver;
-            homePageLogic = new HomePageLogic(fixture,cenarioContext);
+            homePageLogic = new HomePageLogic(fixture);
         }
 
         [Given(@"que navego para pagina inicial")]

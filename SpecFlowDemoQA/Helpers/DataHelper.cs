@@ -8,39 +8,39 @@ namespace SpecFlowDemoQA.Helpers
 {
     internal class DataHelper
     {
-        public static string DataAtual()
+        public static string GetDataAtual()
         {
             string data = DateTime.Now.ToString("dd-MM-yyyy");
             return data;
         }
 
-        public static string HoraAtual()
+        public static string GetHoraAtual()
         {
             string hora = DateTime.Now.ToString("HH-mm-ss-fff");
             return hora;
         }
 
-        public static string CaminhoScreenshot()
+        public static string GetCaminhoScreenshot()
         {
-            string caminhoScreenshot = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + DataAtual() + "\\";
+            string caminhoScreenshot = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + GetDataAtual() + "\\";
             return caminhoScreenshot;
         }
 
-        public static string CaminhoEvidencias()
+        public static string GetCaminhoEvidencias()
         {
-            string caminhoEvidencias = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + DataAtual() + "\\";
+            string caminhoEvidencias = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + GetDataAtual() + "\\";
             return caminhoEvidencias;
         }
 
-        public static string CaminhoStatusPassed()
+        public static string GetCaminhoStatusPassed()
         {
-            string caminhoStatusPassed = CaminhoEvidencias() + "Passed\\";
+            string caminhoStatusPassed = GetCaminhoEvidencias() + "Passed\\";
             return caminhoStatusPassed;
         }
 
-        public static string CaminhoStatusFailed()
+        public static string GetCaminhoStatusFailed()
         {
-            string caminhoStatusFailed = CaminhoEvidencias() + "Failed\\";
+            string caminhoStatusFailed = GetCaminhoEvidencias() + "Failed\\";
             return caminhoStatusFailed;
         }
     }

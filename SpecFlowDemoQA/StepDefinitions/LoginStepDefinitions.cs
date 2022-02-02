@@ -10,13 +10,12 @@ namespace SpecFlowDemoQA.StepDefinitions
     {
         private IWebDriver driver;
         private LoginLogic loginLogic;
-        private ScenarioContext cenarioContext;
 
-        public LoginStepDefinitions(TestFixture fixture, ScenarioContext cenarioContext)
+        public LoginStepDefinitions(TestFixture fixture)
         {
-            this.cenarioContext = cenarioContext;
-            driver = fixture.driver;
-            loginLogic = new LoginLogic(fixture,cenarioContext);       
+
+            driver = fixture.driver;      
+            loginLogic = new LoginLogic(fixture);       
         }      
         
         [When(@"clico em login")]

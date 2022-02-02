@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Evidences\" />
     <Folder Include="Screenshoots\" />
   </ItemGroup>
 

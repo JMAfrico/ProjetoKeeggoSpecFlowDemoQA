@@ -16,25 +16,23 @@ namespace SpecFlowDemoQA.Logic
         private WebDriverWait wait;
         private CSVHelper csvHelper;
         private IJavaScriptExecutor js;
-        private ScreenShotUtil screenShotUtil;
-        private ScenarioContext cenarioContext;
 
-        public LoginLogic(TestFixture fixture, ScenarioContext cenarioContext)
+
+        public LoginLogic(TestFixture fixture)
         {
-            this.cenarioContext = cenarioContext;
             driver = fixture.driver;
             loginPage = new LoginPage(driver);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             csvHelper = new CSVHelper();
             js = (IJavaScriptExecutor)driver;
-            screenShotUtil = new ScreenShotUtil(cenarioContext);
+
         }
 
         public void ClicarBtnLogin()
         {
             string step = "Clico em login";
             IWebElement BtnLogin = wait.Until(d => d.FindElement(loginPage.BtnLogin));
-            screenShotUtil.TakesScreenshot(driver,BtnLogin);
+            ScreenShotUtil.TakesScreenshot(driver,BtnLogin,step);
             BtnLogin.Click();
         }
 
@@ -44,7 +42,7 @@ namespace SpecFlowDemoQA.Logic
             var nome = csvHelper.GetValueByRowAndColumn("login.csv", 1, "First_name");
             var UserName = wait.Until(e => e.FindElement(loginPage.TxtUser));            
             UserName.SendKeys(nome);
-            screenShotUtil.TakesScreenshot(driver, UserName);
+            ScreenShotUtil.TakesScreenshot(driver, UserName,step);
         }
         
         public void PreencherSenhaValidaDeLogin()
@@ -53,7 +51,7 @@ namespace SpecFlowDemoQA.Logic
             var senha = csvHelper.GetValueByRowAndColumn("login.csv", 1, "Password");
             var Password = wait.Until(e => e.FindElement(loginPage.TxtSenha));
             Password.SendKeys(senha);
-            screenShotUtil.TakesScreenshot(driver, Password);
+            ScreenShotUtil.TakesScreenshot(driver, Password, step);
         }
 
         public void ValidarLoginEfetuado()
@@ -61,7 +59,7 @@ namespace SpecFlowDemoQA.Logic
             string step = "Valido Login Efetuado";
             IWebElement btnLogOut = wait.Until(e => e.FindElement(loginPage.BtnLogOut));
             bool Logado = btnLogOut.Displayed;
-            screenShotUtil.TakesScreenshot(driver, btnLogOut); 
+            ScreenShotUtil.TakesScreenshot(driver, btnLogOut, step); 
             Assert.True(Logado);
         }
 
@@ -71,7 +69,7 @@ namespace SpecFlowDemoQA.Logic
             var lblLoginInvalido = wait.Until(e => e.FindElement(loginPage.LblInvalidoLoginOuSenha));           
             js.ExecuteScript("arguments[0].scrollIntoView(true);", lblLoginInvalido);
             bool loginErro = lblLoginInvalido.Displayed;
-            screenShotUtil.TakesScreenshot(driver, lblLoginInvalido);
+            ScreenShotUtil.TakesScreenshot(driver, lblLoginInvalido, step);
             Assert.True(loginErro);
         }
 
@@ -81,7 +79,7 @@ namespace SpecFlowDemoQA.Logic
             var nome = csvHelper.GetValueByRowAndColumn("login.csv", 2, "First_name");
             var UserName = wait.Until(e => e.FindElement(loginPage.TxtUser));
             UserName.SendKeys(nome);
-            screenShotUtil.TakesScreenshot(driver, UserName);
+            ScreenShotUtil.TakesScreenshot(driver, UserName, step);
         }
 
         public void PreencherSenhaInvalidaDeLogin()
@@ -90,7 +88,7 @@ namespace SpecFlowDemoQA.Logic
             var senha = csvHelper.GetValueByRowAndColumn("login.csv", 2, "Password");
             var Password = wait.Until(e => e.FindElement(loginPage.TxtSenha));
             Password.SendKeys(senha);
-            screenShotUtil.TakesScreenshot(driver, Password);
+            ScreenShotUtil.TakesScreenshot(driver, Password, step);
         }
     }  
 }

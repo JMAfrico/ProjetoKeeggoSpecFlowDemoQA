@@ -6,24 +6,21 @@ using System.Drawing.Imaging;
 namespace SpecFlowDemoQA.Utils
 {
     public class ScreenShotUtil
-    { 
-        private ScenarioContext cenario;
-        public ScreenShotUtil(ScenarioContext cenario)
+    {
+        public static byte[] TakesScreenshot(IWebDriver driver, IWebElement element, string step)
         {
-            this.cenario = cenario;
-        }
-
-        public byte[] TakesScreenshot(IWebDriver driver, IWebElement element)
-        {
-            if (!Directory.Exists(DataHelper.CaminhoScreenshot()))
+            if (!Directory.Exists(DataHelper.GetCaminhoScreenshot()))
             {
-                Directory.CreateDirectory(DataHelper.CaminhoScreenshot());
+                Directory.CreateDirectory(DataHelper.GetCaminhoScreenshot());
             }
-            string fileName = DataHelper.CaminhoScreenshot() + DataHelper.DataAtual() + "-" + DataHelper.HoraAtual() + ".jpg";
+
+            string fileName = DataHelper.GetCaminhoScreenshot() + DataHelper.GetDataAtual() + "-" + DataHelper.GetHoraAtual() +"_"+step.ToUpper()+".jpg";
             byte[] byteArray = ((ITakesScreenshot)driver).GetScreenshot().AsByteArray;
             Bitmap screenshot = new Bitmap(new MemoryStream(byteArray));
             screenshot.Save(string.Format(fileName, ImageFormat.Jpeg));
             return byteArray;
         } 
+
+
     }
 }
