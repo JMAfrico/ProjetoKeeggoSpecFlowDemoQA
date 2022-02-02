@@ -11,13 +11,14 @@ namespace SpecFlowDemoQA.Utils
         private ITestOutputHelper terminal { get; set; }
         PDFUtil pdfUtil;
         ScenarioContext cenario;
-
+        IWebDriver driver;
+        IWebElement element;
 
         public Hooks(ITestOutputHelper terminal, ScenarioContext cenario)
-        {
+        {           
             this.terminal = terminal;   
-            this.cenario = cenario;
-            pdfUtil = new PDFUtil(cenario) ;
+            this.cenario = cenario;     
+            pdfUtil = new PDFUtil(cenario,driver,element);
         }
 
         [BeforeScenario]
@@ -51,12 +52,5 @@ namespace SpecFlowDemoQA.Utils
                 pdfUtil.deletarPasta();
             }
         }
-
-        [BeforeStep]
-        public void BeforeStep()
-        {
-            terminal.WriteLine(cenario.StepContext.StepInfo.Text);
-        }
-
     }
 }

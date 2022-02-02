@@ -7,31 +7,35 @@ using iText.Kernel.Colors;
 using iText.Kernel.Pdf.Canvas.Draw;
 using Image = iText.Layout.Element.Image;
 using iText.IO.Image;
+using OpenQA.Selenium;
+using SpecFlowDemoQA.Helpers;
 
 namespace SpecFlowDemoQA.Utils
 {
     public class PDFUtil
     {
         private ScenarioContext cenario;
-       
-        
-        public PDFUtil(ScenarioContext cenario)
-        {
-            this.cenario = cenario;
+        private ScreenShotUtil ScreenShotUtil;
+        private IWebDriver driver;
+        private IWebElement element;
 
+        public PDFUtil(ScenarioContext cenario, IWebDriver driver, IWebElement element)
+        {
+            this.driver = driver;
+            this.element = element;
+            this.cenario = cenario;
+            ScreenShotUtil = new ScreenShotUtil(cenario);
         }
 
         public Document exportarPDF()
         {
-            string data = DateTime.Now.ToString("dd-MM-yy");
-            string hora = DateTime.Now.ToString("HH-mm-ss");
-            string argumentosNomePDF = data + "-" + hora + "-" + cenario.ScenarioInfo.Title;
-            string caminho = nomeadorCenario(cenario);
+            string arguments = DataHelper.DataAtual() + "-" + DataHelper.HoraAtual() + "-" + cenario.ScenarioInfo.Title +".pdf";
+            string fileEvidences = FileEvidences(cenario);
+            Dictionary<Image, string> images = img(driver, element);
 
-            using (PdfWriter pdfw = new PdfWriter(caminho + argumentosNomePDF + ".pdf", new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
+            using (PdfWriter pdfw = new PdfWriter(fileEvidences + arguments, new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
             {
-                Image[] imagem = adicionarImagensNoPDF();             
-                var pdfdocument = new PdfDocument(pdfw);             
+                var pdfdocument = new PdfDocument(pdfw);
                 var document = new Document(pdfdocument, PageSize.A4);
                 document.Add(cabecalho());
                 document.Add(automatizador());
@@ -40,10 +44,11 @@ namespace SpecFlowDemoQA.Utils
                 document.Add(nomeCenario(cenario));
                 document.Add(statusCenario(cenario));
                 document.Add(new LineSeparator(new SolidLine()));
-                for (int i = 0; i < imagem.Length; i++)
-                {                 
-                    document.Add(imagem[i]);                    
-                }
+                foreach (KeyValuePair<Image, string> item in images)
+                {
+                    document.Add(item.Key);
+                    document.Add(new Paragraph(item.Value));     
+                }           
                 document.Close();
                 pdfdocument.Close();
                 return document;
@@ -99,43 +104,36 @@ namespace SpecFlowDemoQA.Utils
             }
         }
 
-        private string nomeadorCenario(ScenarioContext cenario)
-        {
-            string data = DateTime.Now.ToString("dd-MM-yy");
-            string hora = DateTime.Now.ToString("HH-mm-ss");
+        private string FileEvidences(ScenarioContext cenario)
+        {           
             
-            string caminhoPadrao = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + data + "\\";
-
-            if (!Directory.Exists(caminhoPadrao))
+            if (!Directory.Exists(DataHelper.CaminhoEvidencias()))
             {
-                Directory.CreateDirectory(caminhoPadrao);
+                Directory.CreateDirectory(DataHelper.CaminhoEvidencias());
             }
 
-            string caminhoStatusPassed = caminhoPadrao + "Passed\\";
-            string caminhoStatusFailed = caminhoPadrao + "Failed\\";
             if (cenario.ScenarioExecutionStatus == ScenarioExecutionStatus.OK)
             {
-                if (!Directory.Exists(caminhoStatusPassed))
+                if (!Directory.Exists(DataHelper.CaminhoStatusPassed()))
                 {
-                    Directory.CreateDirectory(caminhoStatusPassed);
+                    Directory.CreateDirectory(DataHelper.CaminhoStatusPassed());
                 }
-                return caminhoStatusPassed;
+                return DataHelper.CaminhoStatusPassed();
             }
             else
             {
-                if (!Directory.Exists(caminhoStatusFailed))
+                if (!Directory.Exists(DataHelper.CaminhoStatusFailed()))
                 {
-                    Directory.CreateDirectory(caminhoStatusFailed);
+                    Directory.CreateDirectory(DataHelper.CaminhoStatusFailed());
                 }
-                return caminhoStatusFailed;
+                return DataHelper.CaminhoStatusFailed();
             }
-
         }
 
         private Image[] adicionarImagensNoPDF()
         {
 
-            string data = DateTime.Now.ToString("yyyy-MM-dd");
+            string data = DateTime.Now.ToString("dd-MM-yyyy");
 
             string nomePasta = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\";
             string[] itens = Directory.GetFiles(nomePasta);
@@ -154,11 +152,26 @@ namespace SpecFlowDemoQA.Utils
 
         public void deletarPasta()
         {
-            string data = DateTime.Now.ToString("yyyy-MM-dd");
+            string data = DateTime.Now.ToString("dd-MM-yyyy");
             Directory.Delete(@"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\", true);
         }
 
+        public Dictionary<Image,string> img(IWebDriver driver, IWebElement element)
+        {
+            Dictionary<Image, string> a = new Dictionary<Image, string>();
 
-    }
-    
+            string data = DateTime.Now.ToString("dd-MM-yyyy");
+
+            string nomePasta = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + data + "\\";
+            string[] itens = Directory.GetFiles(nomePasta);
+            Image[] images = new Image[itens.Length];
+
+            for (int i = 0; i < itens.Length; i++)
+            {
+                a.Add(new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER),"teste");
+            }
+            return a;
+     
+        }
+    }  
 }

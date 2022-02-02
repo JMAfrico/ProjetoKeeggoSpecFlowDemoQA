@@ -10,7 +10,6 @@ namespace SpecFlowDemoQA.Pages
     public class HomePage
     {
         private IWebDriver driver;
-
         public By txtSiteDemoQA { get; private set; }
         public HomePage(IWebDriver driver)
         {

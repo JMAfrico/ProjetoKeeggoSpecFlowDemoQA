@@ -1,10 +1,6 @@
 using OpenQA.Selenium;
-using System;
-using TechTalk.SpecFlow;
 using SpecFlowDemoQA.Fixture;
 using SpecFlowDemoQA.Logic;
-using SpecFlowDemoQA.Pages;
-using OpenQA.Selenium.Support.UI;
 
 namespace SpecFlowDemoQA.StepDefinitions
 {

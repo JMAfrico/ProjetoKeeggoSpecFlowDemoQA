@@ -1,8 +1,6 @@
 using OpenQA.Selenium;
 using SpecFlowDemoQA.Fixture;
 using SpecFlowDemoQA.Logic;
-using System;
-using TechTalk.SpecFlow;
 
 namespace SpecFlowDemoQA.StepDefinitions
 {
@@ -15,7 +13,7 @@ namespace SpecFlowDemoQA.StepDefinitions
 
         public HomePageStepDefinitions(TestFixture fixture, ScenarioContext cenarioContext)
         {   
-            this.scenarioContext = cenarioContext;
+            scenarioContext = cenarioContext;
             driver = fixture.driver;
             homePageLogic = new HomePageLogic(fixture,cenarioContext);
         }
