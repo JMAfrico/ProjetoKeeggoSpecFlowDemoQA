@@ -9,8 +9,8 @@ namespace SpecFlowDemoQA.Utils
     public sealed class Hooks
     {
         private ITestOutputHelper terminal { get; set; }
-        PDFUtil pdfUtil;
-        ScenarioContext cenario;
+        private PDFUtil pdfUtil;
+        private ScenarioContext cenario;
 
         public Hooks(ITestOutputHelper terminal, ScenarioContext cenario)
         {           

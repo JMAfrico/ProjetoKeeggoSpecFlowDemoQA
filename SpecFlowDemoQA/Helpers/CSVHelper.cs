@@ -18,7 +18,7 @@ namespace SpecFlowDemoQA.Helpers
             {
                 IgnoreBlankLines = false,
                 HasHeaderRecord = true,
-                DetectDelimiter = true
+                DetectDelimiter = true    
             };
 
             using (var reader = new StreamReader(path))
@@ -34,11 +34,13 @@ namespace SpecFlowDemoQA.Helpers
                     if (current_row == row)
                     {
                         return csv.GetField(column);
+                       
                     }
 
                     current_row++;
+                    
                 }
-
+                
                 throw new Exception($"Row {row} wasn't found in file {path}");
             }
             

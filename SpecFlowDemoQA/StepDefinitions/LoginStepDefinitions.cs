@@ -59,5 +59,65 @@ namespace SpecFlowDemoQA.StepDefinitions
         {
             loginLogic.ValidoLoginSenhaOuUsuarioInvalido();
         }
+
+        [When(@"clico em novo usuario de login")]
+        public void WhenClicoEmNovoUsuarioDeLogin()
+        {
+            loginLogic.ClicoEmNovoUsuarioDeLogin();
+        }
+
+        [When(@"preencho o campo primeiro nome de novo usuario")]
+        public void WhenPreenchoOCampoPrimeiroNomeDeNovoUsuario()
+        {
+            loginLogic.PreenchoOPrimeiroNomeDeNovoUsuario();
+        }
+
+        [When(@"preencho o campo ultimo nome de novo usuario")]
+        public void WhenPreenchoOCampoUltimoNomeDeNovoUsuario()
+        {
+            loginLogic.PreenchoUltimoNomeDeNovoUsuario();
+        }
+
+        [When(@"preencho o campo usuario de novo usuario")]
+        public void WhenPreenchoOCampoUsuarioDeNovoUsuario()
+        {
+            loginLogic.PreenchoOCampoUserNameDeNovoUsuario();
+        }
+
+        [When(@"preencho o campo senha de novo usuario")]
+        public void WhenPreenchoOCampoSenhaDeNovoUsuario()
+        {
+            loginLogic.PreenchoOCampoSenhaDeNovoUsuario();
+        }
+
+        [When(@"clico na opcao nao sou um robo")]
+        public void WhenClicoNaOpcaoNaoSouUmRobo()
+        {
+            loginLogic.ClicoNaOpcaoNaoSouUmRobo();
+        }
+
+        [When(@"clico em registrar")]
+        public void WhenClicoEmRegistrar()
+        {
+            loginLogic.ClicoBtnRegistrarNovoUsuario();
+        }
+
+        [Then(@"valido a mensagem de usuario cadastrado")]
+        public void ThenValidoAMensagemDeUsuarioCadastrado()
+        {
+            loginLogic.ValidoMensagemNovoUsuarioCadastrado();
+        }
+
+        [Then(@"valido a mensagem de erro ao efetuar cadastro")]
+        public void ThenValidoAMensagemDeErroAoEfetuarCadastro()
+        {
+            loginLogic.ValidoMensagemDeErroAoEfetuarNovoCadastro();
+        }
+
+        [Then(@"valido a mensagem de usuario existente")]
+        public void ThenValidoAMensagemDeUsuarioExistente()
+        {
+            loginLogic.ValidoMensagemDeErroAoEfetuarNovoCadastroUsuarioJaExiste();
+        }
     }
 }

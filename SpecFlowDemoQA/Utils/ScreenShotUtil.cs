@@ -19,8 +19,20 @@ namespace SpecFlowDemoQA.Utils
             Bitmap screenshot = new Bitmap(new MemoryStream(byteArray));
             screenshot.Save(string.Format(fileName, ImageFormat.Jpeg));
             return byteArray;
-        } 
+        }
 
+        public static byte[] TakesScreenshot(IWebDriver driver, string step)
+        {
+            if (!Directory.Exists(DataHelper.GetCaminhoScreenshot()))
+            {
+                Directory.CreateDirectory(DataHelper.GetCaminhoScreenshot());
+            }
 
+            string fileName = DataHelper.GetCaminhoScreenshot() + DataHelper.GetDataAtual() + "-" + DataHelper.GetHoraAtual() + "_" + step.ToUpper() + ".jpg";
+            byte[] byteArray = ((ITakesScreenshot)driver).GetScreenshot().AsByteArray;
+            Bitmap screenshot = new Bitmap(new MemoryStream(byteArray));
+            screenshot.Save(string.Format(fileName, ImageFormat.Jpeg));
+            return byteArray;
+        }
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LIzEiMywHHVaoeGF7CjS4XF3lisyn+4SPzloF20By1EqTdYnKb1RH7D/yz10kWprLn0vkFf313SDbkCHjDNrow==",
+  "dgSpecHash": "fPvCrQHo7u4Tk1GCPBt3WlLr03QH11XFgcbnM6PauiPE8a8hEL9mhJKQ8+r7a0nQVZ552EXKawmJSeYK4+H/NQ==",
   "success": true,
   "projectFilePath": "C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\SpecFlowDemoQA.csproj",
   "expectedPackageFiles": [
@@ -107,6 +107,7 @@
     "C:\\Users\\joao.africo\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\joao.africo\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\joao.africo\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
+    "C:\\Users\\joao.africo\\.nuget\\packages\\selenium.support\\4.1.0\\selenium.support.4.1.0.nupkg.sha512",
     "C:\\Users\\joao.africo\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
     "C:\\Users\\joao.africo\\.nuget\\packages\\selenium.webdriver.chromedriver\\97.0.4692.7100\\selenium.webdriver.chromedriver.97.0.4692.7100.nupkg.sha512",
     "C:\\Users\\joao.africo\\.nuget\\packages\\sharpcompress\\0.23.0\\sharpcompress.0.23.0.nupkg.sha512",

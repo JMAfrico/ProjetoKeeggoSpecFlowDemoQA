@@ -14,18 +14,12 @@ namespace SpecFlowDemoQA.Utils
     public class PDFUtil
     {
         private ScenarioContext cenario;
-        //private IWebDriver driver;
-        //private IWebElement element;
         
         public PDFUtil(ScenarioContext cenario)
         {
-            this.cenario = cenario;
-            //this.driver = driver;
-            //this.element = element;
-            
+            this.cenario = cenario;        
         }
-
-        
+       
         public Document exportarPDF()
         {
             string arguments = DataHelper.GetDataAtual() + "-" + DataHelper.GetHoraAtual() + "-" + cenario.ScenarioInfo.Title ;
@@ -154,11 +148,6 @@ namespace SpecFlowDemoQA.Utils
                 listaDeImagens.Add(new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER), posicaoStep);
             }
             return listaDeImagens;
-        }
-
-        static string GetStep(string step)
-        {
-            return step;
         }
 
     }  

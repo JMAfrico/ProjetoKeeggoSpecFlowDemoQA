@@ -13,13 +13,11 @@ namespace SpecFlowDemoQA.Fixture
 {
     public class TestFixture : IDisposable
     {
-        public IWebDriver driver { get; private set; }
-        public ExtentReports extent;
+        public IWebDriver driver;
 
         public TestFixture()
         {
-            driver = new ChromeDriver(LocalDriver.PastaDoExecutavel);
-            extent = new ExtentReports();        
+            driver = new ChromeDriver(LocalDriver.PastaDoExecutavel);     
         }
         public void Dispose()
         {

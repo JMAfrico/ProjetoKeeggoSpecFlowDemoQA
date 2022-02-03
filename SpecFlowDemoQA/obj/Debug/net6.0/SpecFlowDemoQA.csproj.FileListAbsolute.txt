@@ -198,4 +198,5 @@ C:\CSharpAlura\SpecFlowDemoQA\SpecFlowDemoQA\bin\Debug\net6.0\itext.styledxmlpar
 C:\CSharpAlura\SpecFlowDemoQA\SpecFlowDemoQA\bin\Debug\net6.0\itext.svg.dll
 C:\CSharpAlura\SpecFlowDemoQA\SpecFlowDemoQA\bin\Debug\net6.0\itext.commons.dll
 C:\CSharpAlura\SpecFlowDemoQA\SpecFlowDemoQA\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\CSharpAlura\SpecFlowDemoQA\SpecFlowDemoQA\bin\Debug\net6.0\WebDriver.Support.dll
 C:\CSharpAlura\SpecFlowDemoQA\SpecFlowDemoQA\obj\Debug\net6.0\SpecFlowDemoQA.csproj.AssemblyReference.cache
