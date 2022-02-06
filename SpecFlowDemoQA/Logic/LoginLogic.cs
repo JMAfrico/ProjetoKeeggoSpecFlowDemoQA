@@ -11,7 +11,6 @@ namespace SpecFlowDemoQA.Logic
     public class LoginLogic
     {
         private LoginPage loginPage;
-        private HomePage homePage;
         private IWebDriver driver;
         private WebDriverWait wait;
         private CSVHelper csvHelper;
@@ -21,7 +20,6 @@ namespace SpecFlowDemoQA.Logic
         {
             driver = fixture.driver;
             loginPage = new LoginPage(driver);
-            homePage = new HomePage(driver);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             csvHelper = new CSVHelper();
             js = (IJavaScriptExecutor)driver;
@@ -29,73 +27,72 @@ namespace SpecFlowDemoQA.Logic
 
         public void ClicarBtnLogin()
         {
-            string step = "Clico em login";
+            string step = "Clico no botão 'Login'";
             IWebElement BtnLogin = wait.Until(d => d.FindElement(loginPage.BtnLogin));
-            ScreenShotUtil.TakesScreenshot(driver,BtnLogin,step);
+            ScreenShotUtil.TakesScreenshot(driver,step) ;
             BtnLogin.Click();
         }
 
         public void PreencherUsuarioValidoDeLogin()
         {
-            string step = "Preencho usuário valido de Login";
+            string step = "Preencho usuário 'valido' de Login";
             var nome = csvHelper.GetValueByRowAndColumn("login.csv", 1, "First_name");
             var UserName = wait.Until(e => e.FindElement(loginPage.TxtUser));            
             UserName.SendKeys(nome);
-            ScreenShotUtil.TakesScreenshot(driver, UserName,step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
         
         public void PreencherSenhaValidaDeLogin()
         {
-            string step = "Preencho senha valida de Login";
+            string step = "Preencho senha 'valida' de Login";
             var senha = csvHelper.GetValueByRowAndColumn("login.csv", 1, "Password");
             var Password = wait.Until(e => e.FindElement(loginPage.TxtSenha));
             Password.SendKeys(senha);
-            ScreenShotUtil.TakesScreenshot(driver, Password, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void ValidarLoginEfetuado()
         {
-            string step = "Valido Login Efetuado";
+            string step = "Valido 'login efetuado'";
             IWebElement btnLogOut = wait.Until(e => e.FindElement(loginPage.BtnLogOut));
             bool Logado = btnLogOut.Displayed;
-            ScreenShotUtil.TakesScreenshot(driver, btnLogOut, step); 
+            ScreenShotUtil.TakesScreenshot(driver, step); 
             Assert.True(Logado);
         }
 
         public void ValidoLoginSenhaOuUsuarioInvalido()
         {
-            string step = "Valido senha ou usuário invalido";
+            string step = "Valido mensagem de 'senha ou usuário invalido'";
             var lblLoginInvalido = wait.Until(e => e.FindElement(loginPage.LblInvalidoLoginOuSenha));           
             js.ExecuteScript("arguments[0].scrollIntoView(true);", lblLoginInvalido);
             bool loginErro = lblLoginInvalido.Displayed;
-            ScreenShotUtil.TakesScreenshot(driver, lblLoginInvalido, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
             Assert.True(loginErro);
         }
 
         public void PreencherUsuarioInvalidoDeLogin()
         {
-            string step = "Preencho usuário invalido de Login";
+            string step = "Preencho usuário 'invalido' de login";
             var nome = csvHelper.GetValueByRowAndColumn("login.csv", 2, "First_name");
             var UserName = wait.Until(e => e.FindElement(loginPage.TxtUser));
             UserName.SendKeys(nome);
-            ScreenShotUtil.TakesScreenshot(driver, UserName, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void PreencherSenhaInvalidaDeLogin()
         {
-            string step = "Preencho senha inválida de Login";
+            string step = "Preencho senha 'inválida' de login";
             var senha = csvHelper.GetValueByRowAndColumn("login.csv", 2, "Password");
             var Password = wait.Until(e => e.FindElement(loginPage.TxtSenha));
             Password.SendKeys(senha);
-            ScreenShotUtil.TakesScreenshot(driver, Password, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void ClicoEmNovoUsuarioDeLogin()
         {
             string step = "Clico em 'novo Usuario'";
             var btnNovoUsuario = wait.Until(e =>e.FindElement(loginPage.BtnNewUser));
-            
-            ScreenShotUtil.TakesScreenshot(driver, btnNovoUsuario, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
             btnNovoUsuario.Click();
         }
 
@@ -105,7 +102,7 @@ namespace SpecFlowDemoQA.Logic
             var firstname = csvHelper.GetValueByRowAndColumn("novoUsuario.csv", 12, "first_name");
             var txtNomeUsuario = wait.Until(e => e.FindElement(loginPage.TxtFirstName));
             txtNomeUsuario.SendKeys(firstname);
-            ScreenShotUtil.TakesScreenshot(driver,txtNomeUsuario, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void PreenchoUltimoNomeDeNovoUsuario()
@@ -114,7 +111,7 @@ namespace SpecFlowDemoQA.Logic
             var lastname = csvHelper.GetValueByRowAndColumn("novoUsuario.csv", 12, "last_name");
             var txtSobrenomeUsuario = wait.Until(e => e.FindElement(loginPage.TxtLastName));
             txtSobrenomeUsuario.SendKeys(lastname);
-            ScreenShotUtil.TakesScreenshot(driver, txtSobrenomeUsuario, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void PreenchoOCampoUserNameDeNovoUsuario()
@@ -123,7 +120,7 @@ namespace SpecFlowDemoQA.Logic
             var username = csvHelper.GetValueByRowAndColumn("novoUsuario.csv", 12, "usuario");
             var txtLastName = wait.Until(e => e.FindElement(loginPage.TxtUser));
             txtLastName.SendKeys(username);
-            ScreenShotUtil.TakesScreenshot(driver, txtLastName, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void PreenchoOCampoSenhaDeNovoUsuario()
@@ -132,7 +129,7 @@ namespace SpecFlowDemoQA.Logic
             var senha = csvHelper.GetValueByRowAndColumn("novoUsuario.csv", 12, "senha");
             var txtSenha = wait.Until(e => e.FindElement(loginPage.TxtSenha));
             txtSenha.SendKeys(senha);
-            ScreenShotUtil.TakesScreenshot(driver, txtSenha, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
         }
 
         public void ClicoNaOpcaoNaoSouUmRobo()
@@ -140,7 +137,7 @@ namespace SpecFlowDemoQA.Logic
             string step = "Clico na opcao 'nao sou um robo' de ReCAPCHA";
             var BtnNaoSouRobo = wait.Until(e => e.FindElement(loginPage.BtnRecapcha));
             js.ExecuteScript("arguments[0].scrollIntoView(true);", BtnNaoSouRobo);
-            ScreenShotUtil.TakesScreenshot(driver,BtnNaoSouRobo, step);     
+            ScreenShotUtil.TakesScreenshot(driver, step);     
             BtnNaoSouRobo.Click();
             Thread.Sleep(10000);
         }
@@ -150,7 +147,7 @@ namespace SpecFlowDemoQA.Logic
             string step = "Clico em 'Registrar' de novo usuario";
             var BtnRegistrar = wait.Until(e => e.FindElement(loginPage.BtnRegister));
             js.ExecuteScript("arguments[0].scrollIntoView(true);", BtnRegistrar);
-            ScreenShotUtil.TakesScreenshot(driver,BtnRegistrar, step);
+            ScreenShotUtil.TakesScreenshot(driver,step);
             BtnRegistrar.Click();
         }
         public void ValidoMensagemNovoUsuarioCadastrado()
@@ -184,25 +181,20 @@ namespace SpecFlowDemoQA.Logic
 
         public void ValidoMensagemDeErroAoEfetuarNovoCadastro()
         {
-            string step = "Valido Mensagem de 'erro ao efetuar novo cadastro'";
+            string step = "Valido mensagem de 'erro ao efetuar novo cadastro'";
             var MsgErro = wait.Until(e => e.FindElement(loginPage.lblMensagemErroCadastro));
             js.ExecuteScript("arguments[0].scrollIntoView(true);", MsgErro);
-            ScreenShotUtil.TakesScreenshot(driver, MsgErro, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
             Assert.True(MsgErro.Displayed);
         }
 
         public void ValidoMensagemDeErroAoEfetuarNovoCadastroUsuarioJaExiste()
         {
-            string step = "Valido Mensagem de erro 'usuario ja existe''";
+            string step = "Valido mensagem de erro 'usuario ja existe''";
             var MsgErro = wait.Until(e => e.FindElement(loginPage.lblMensagemErroUsuarioJaExiste));
             js.ExecuteScript("arguments[0].scrollIntoView(true);", MsgErro);
-            ScreenShotUtil.TakesScreenshot(driver, MsgErro, step);
+            ScreenShotUtil.TakesScreenshot(driver, step);
             Assert.True(MsgErro.Displayed);
         }
-
-        //public bool RecapchaManual()
-        //{
-        //    if(ElementClickInterceptedException == )
-        //}
     }
 }

@@ -1,7 +1,4 @@
-﻿using AventStack.ExtentReports;
-using OpenQA.Selenium;
-using TechTalk.SpecFlow;
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 
 namespace SpecFlowDemoQA.Utils
 {

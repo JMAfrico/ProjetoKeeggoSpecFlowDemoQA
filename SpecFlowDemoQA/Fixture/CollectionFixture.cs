@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpecFlowDemoQA.Fixture
+﻿namespace SpecFlowDemoQA.Fixture
 {
     [CollectionDefinition("Chrome Driver")]
     public class CollectionFixture : ICollectionFixture<TestFixture>

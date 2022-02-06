@@ -1,47 +1,85 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpecFlowDemoQA.Helpers
+﻿namespace SpecFlowDemoQA.Helpers
 {
-    internal class DataHelper
+    public class DataHelper
     {
         public static string GetDataAtual()
         {
-            string data = DateTime.Now.ToString("dd-MM-yyyy");
-            return data;
+            try
+            {
+                string data = DateTime.Now.ToString("dd-MM-yyyy");
+                return data;
+
+            }catch(ArgumentOutOfRangeException e)
+            {
+                throw new ArgumentOutOfRangeException(e.Message);
+            }
         }
 
         public static string GetHoraAtual()
         {
-            string hora = DateTime.Now.ToString("HH-mm-ss-fff");
-            return hora;
+            try
+            {
+                string hora = DateTime.Now.ToString("HH-mm-ss-fff");
+                return hora;
+            }
+            catch(ArgumentOutOfRangeException e)
+            {
+                throw new ArgumentOutOfRangeException(e.Message);
+
+            }
         }
 
         public static string GetCaminhoScreenshot()
         {
-            string caminhoScreenshot = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + GetDataAtual() + "\\";
-            return caminhoScreenshot;
+            try
+            {
+                string caminhoScreenshot = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + GetDataAtual() + "\\";
+                return caminhoScreenshot;
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException("Caminho da pasta Screenshots não encontrado. "+e.Message);
+            }
+
         }
 
         public static string GetCaminhoEvidencias()
         {
-            string caminhoEvidencias = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + GetDataAtual() + "\\";
-            return caminhoEvidencias;
+            try
+            {
+                string caminhoEvidencias = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + GetDataAtual() + "\\";
+                return caminhoEvidencias;
+            }catch (ArgumentException e)
+            {
+                throw new ArgumentException("Caminho da pasta Evidencias não encontrado. " + e.Message);
+            }
+
         }
 
         public static string GetCaminhoStatusPassed()
         {
-            string caminhoStatusPassed = GetCaminhoEvidencias() + "Passed\\";
-            return caminhoStatusPassed;
+            try
+            {
+                string caminhoStatusPassed = GetCaminhoEvidencias() + "Passed\\";
+                return caminhoStatusPassed;
+
+            }catch(ArgumentException e)
+            {
+                throw new ArgumentException("Caminho da pasta Status Passed não encontrado. " + e.Message);
+            }
         }
 
         public static string GetCaminhoStatusFailed()
         {
-            string caminhoStatusFailed = GetCaminhoEvidencias() + "Failed\\";
-            return caminhoStatusFailed;
+            try
+            {
+                string caminhoStatusFailed = GetCaminhoEvidencias() + "Failed\\";
+                return caminhoStatusFailed;
+
+            }catch( ArgumentException e)
+            {
+                throw new ArgumentException("Caminho da pasta Status Failed não encontrado. " + e.Message);
+            }
         }
     }
 }

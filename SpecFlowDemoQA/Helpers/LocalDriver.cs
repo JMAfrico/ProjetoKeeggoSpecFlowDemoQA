@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
 namespace SpecFlowDemoQA.Helpers
 {
     public static class LocalDriver
     {
-            public static string PastaDoExecutavel => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);   
+        private static string PastaDoExecutavel => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);   
+
+        public static string GetPastaDoExecutavel()
+        {
+            try
+            {
+               return PastaDoExecutavel;              
+            }catch (ArgumentException ex)
+            {
+                throw new ArgumentException("Drive Chrome Drive não encontrado. "+ex.Message);
+            }
+        }
     }
 }

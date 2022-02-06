@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SpecFlowDemoQA.Helpers;
 
@@ -17,7 +10,7 @@ namespace SpecFlowDemoQA.Fixture
 
         public TestFixture()
         {
-            driver = new ChromeDriver(LocalDriver.PastaDoExecutavel);     
+            driver = new ChromeDriver(LocalDriver.GetPastaDoExecutavel());     
         }
         public void Dispose()
         {

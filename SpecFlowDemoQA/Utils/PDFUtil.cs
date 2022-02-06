@@ -39,11 +39,14 @@ namespace SpecFlowDemoQA.Utils
                 document.Add(nomeCenario(cenario));
                 document.Add(statusCenario(cenario));
                 document.Add(new LineSeparator(new SolidLine()));
+                document.Add(new AreaBreak());
                 foreach (KeyValuePair<Image, string> item in images)
                 {
-                    document.Add(item.Key);
+                  //item.Key.ScaleToFit(600f, 330f);
+                    document.Add(item.Key.ScaleToFit(600f, 300f));
                     document.Add(new Paragraph());
                     document.Add(new Paragraph(item.Value).SetFontColor(ColorConstants.RED));
+                    document.Add(new AreaBreak());
                 }           
                 document.Close();
                 pdfdocument.Close();
@@ -133,21 +136,30 @@ namespace SpecFlowDemoQA.Utils
 
         public Dictionary<Image, string> AddImagensPDF()
         {
-            Dictionary<Image, string> listaDeImagens = new Dictionary<Image, string>();
-
-            string[] itens = Directory.GetFiles(DataHelper.GetCaminhoScreenshot());
-            string[] Steps = Directory.GetFileSystemEntries(DataHelper.GetCaminhoScreenshot());
-
-            for (int i = 0; i < itens.Length; i++)
+            try
             {
-                int posicaoIndice = Steps[i].IndexOf('_');
-                int posicaoFinal = Steps[i].IndexOf(".jpg");
-                string posicaoStep = Steps[i].Substring(posicaoIndice + 1);
-                
+                Dictionary<Image, string> listaDeImagens = new Dictionary<Image, string>();
 
-                listaDeImagens.Add(new Image(ImageDataFactory.Create(itens[i])).SetTextAlignment(TextAlignment.CENTER), posicaoStep);
+                string[] itens = Directory.GetFiles(DataHelper.GetCaminhoScreenshot());
+                string[] Steps = Directory.GetFileSystemEntries(DataHelper.GetCaminhoScreenshot());
+
+
+                for (int i = 0; i < itens.Length; i++)
+                {
+                    
+                    int posicaoIndice = Steps[i].IndexOf('_');
+                    int posicaoFinal = Steps[i].IndexOf(".jpg");
+                    string posicaoStep = Steps[i].Substring(posicaoIndice + 1);
+
+
+                    listaDeImagens.Add(new Image(ImageDataFactory.Create(itens[i])), posicaoStep);
+                }
+                return listaDeImagens;
+
+            }catch (InvalidOperationException ex)
+            {
+                throw new Exception("Não foi possível adicionar Imagens no PDF. "+ex.Message);
             }
-            return listaDeImagens;
         }
 
     }  
