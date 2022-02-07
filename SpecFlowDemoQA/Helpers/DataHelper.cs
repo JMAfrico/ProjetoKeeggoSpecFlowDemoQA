@@ -33,7 +33,7 @@
         {
             try
             {
-                string caminhoScreenshot = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Screenshoots\\" + GetDataAtual() + "\\";
+                string caminhoScreenshot = @"cd..\\..\\..\\..\\..\\Screenshoots\\" + GetDataAtual() + "\\";
                 return caminhoScreenshot;
             }
             catch (ArgumentException e)
@@ -47,7 +47,7 @@
         {
             try
             {
-                string caminhoEvidencias = @"C:\\CSharpAlura\\SpecFlowDemoQA\\SpecFlowDemoQA\\Evidences\\" + GetDataAtual() + "\\";
+                string caminhoEvidencias = @"cd..\\..\\..\\..\\..\\Evidences\\" + GetDataAtual() + "\\";
                 return caminhoEvidencias;
             }catch (ArgumentException e)
             {
@@ -79,6 +79,31 @@
             }catch( ArgumentException e)
             {
                 throw new ArgumentException("Caminho da pasta Status Failed não encontrado. " + e.Message);
+            }
+        }
+
+        public static string GetFileCSVLogin()
+        {
+            try
+            {
+                string caminhoCSVLogin = @"cd..\\..\\..\\..\\..\\Dados\\login.csv";
+                return caminhoCSVLogin;
+            }catch( Exception e)
+            {
+                throw new Exception("Dados de login não encontrado. "+e.Message);
+            }
+        }
+
+        public static string GetFileCSVCadastro()
+        {
+            try
+            {
+                string caminhoCSVCadastro = @"cd..\\..\\..\\..\\..\\Dados\\novoUsuario.csv";
+                return caminhoCSVCadastro;
+
+            }catch ( Exception e)
+            {
+                throw new Exception("Dados de novo Usuario não encontrado. " + e.Message);
             }
         }
     }
