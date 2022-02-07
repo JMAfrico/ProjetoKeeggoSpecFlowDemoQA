@@ -5,11 +5,21 @@ using System.Drawing.Imaging;
 
 namespace SpecFlowDemoQA.Utils
 {
-    
+    /// <summary>
+    /// Classe responsável por realizar os screenshoots da tela no momento da execução do teste
+    /// </summary>
     public static class ScreenShotUtil
     {
-        //takescreenshot do elemento
-        public static byte[] TakesScreenshot(IWebDriver driver, IWebElement element, string step)
+
+        /// <summary>
+        /// Método static responsável por realizar os screenshoots do elemento no momento da execução do teste
+        /// </summary>
+        /// <param name="driver"> Representa o drive instanciado na classe</param>
+        /// <param name="element"> Representa o elemento no qual será realizado o screenshoot</param>
+        /// <param name="step"> Representa um string contendo o nome do passo realizado no momento do teste</param>
+        /// <returns>Retorna um array de bytes contendo todos os screenshots realizados no momento da execução do teste em formato JPEG no caminho específicado</returns>
+        /// <exception cref="Exception">Exceção lançada caso não sejá possível realizar um screenshoot do elemento</exception>
+        public static byte[] TakesScreenshot(this IWebDriver driver, IWebElement element, string step)
         {
             try
             {
@@ -32,8 +42,17 @@ namespace SpecFlowDemoQA.Utils
             }
         }
 
-        //takescreenshot da tela
-        public static byte[] TakesScreenshot(IWebDriver driver, string step)
+
+        /// <summary>
+        /// Método static responsável por realizar os screenshoots da tela no momento da execução do teste
+        /// </summary>
+        /// <param name="driver">Representa o drive instanciado na classe</param>
+        /// <param name="step">Representa um string contendo o nome do passo realizado no momento do teste</param>
+        /// <returns>
+        /// Retorna um array de bytes contendo todos os screenshots realizados no momento da execução do teste em formato JPEG no caminho específicado
+        /// </returns>
+        /// <exception cref="Exception">Exceção lançada caso não sejá possível realizar um screenshoot </exception>
+        public static byte[] TakesScreenshot(this IWebDriver driver, string step)
         {
             try
             {
@@ -54,5 +73,6 @@ namespace SpecFlowDemoQA.Utils
                 throw new Exception($"Erro ao tirar foto da tela. {ex.Message}");
             }
         }
+
     }
 }

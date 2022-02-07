@@ -1,4 +1,5 @@
-﻿using Xunit.Abstractions;
+﻿using OpenQA.Selenium;
+using Xunit.Abstractions;
 
 namespace SpecFlowDemoQA.Utils
 {
@@ -8,12 +9,14 @@ namespace SpecFlowDemoQA.Utils
         private ITestOutputHelper terminal { get; set; }
         private PDFUtil pdfUtil;
         private ScenarioContext cenario;
+        private IWebDriver driver;
 
         public Hooks(ITestOutputHelper terminal, ScenarioContext cenario)
-        {           
+        {   
+
             this.terminal = terminal;   
             this.cenario = cenario;     
-            pdfUtil = new PDFUtil(cenario);
+            pdfUtil = new PDFUtil(cenario,driver);
         }
 
         [BeforeScenario]
