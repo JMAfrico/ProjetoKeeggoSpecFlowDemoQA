@@ -40,7 +40,7 @@ namespace SpecFlowDemoQA.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Carrinho", "//como cliente cadastrado quero ver meu carrinho de comprar", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features", "Carrinho", "//como cliente cadastrado quero ver meu carrinho de compras", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,15 +80,22 @@ namespace SpecFlowDemoQA.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="adicionando item no carrinho")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="adicionando item no carrinho")]
         [Xunit.TraitAttribute("FeatureTitle", "Carrinho")]
         [Xunit.TraitAttribute("Description", "adicionando item no carrinho")]
         [Xunit.TraitAttribute("Category", "adicionar_item")]
-        public virtual void AdicionandoItemNoCarrinho()
+        [Xunit.InlineDataAttribute("Speaking JavaScript", new string[0])]
+        public virtual void AdicionandoItemNoCarrinho(string livro, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "adicionar_item"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("livro", livro);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("adicionando item no carrinho", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
@@ -111,29 +118,54 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 9
-testRunner.Given("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+testRunner.Given("que navego para pagina inicial", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 10
-testRunner.When("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+testRunner.When("clico em login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 11
-testRunner.Then("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+testRunner.And("preencho usuario valido de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 12
+testRunner.And("preencho senha valida de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 13
+testRunner.And("clico em login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 14
+testRunner.And(string.Format("digito o nome do livro {0}", livro), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 15
+testRunner.And("clico no livro", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 16
+testRunner.And("clico em adicionar a minha colecao", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 17
+testRunner.Then("valido livro adicionado ao carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="remover item no carrinho")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="remover item no carrinho")]
         [Xunit.TraitAttribute("FeatureTitle", "Carrinho")]
         [Xunit.TraitAttribute("Description", "remover item no carrinho")]
         [Xunit.TraitAttribute("Category", "remover_item")]
-        public virtual void RemoverItemNoCarrinho()
+        [Xunit.InlineDataAttribute("Speaking JavaScript", new string[0])]
+        public virtual void RemoverItemNoCarrinho(string livro, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "remover_item"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("livro", livro);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("remover item no carrinho", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 14
+#line 26
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -153,14 +185,35 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 16
-testRunner.Given("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line 28
+testRunner.Given("que navego para pagina inicial", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
-#line 17
-testRunner.When("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line 29
+testRunner.When("clico em login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
-#line 18
-testRunner.Then("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+#line 30
+testRunner.And("preencho usuario valido de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 31
+testRunner.And("preencho senha valida de login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 32
+testRunner.And("clico em login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 33
+testRunner.And("clico em Profile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 34
+testRunner.And(string.Format("digito o nome do livro {0}", livro), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 35
+testRunner.And("clico em remover livro", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 36
+testRunner.And("clico em confirmar de remover livro", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 37
+testRunner.Then("valido livro removido do carrinho", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();

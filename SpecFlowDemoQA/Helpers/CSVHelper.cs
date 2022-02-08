@@ -4,8 +4,19 @@ using CsvHelper.Configuration;
 
 namespace SpecFlowDemoQA.Helpers
 {
+    /// <summary>
+    /// Classe para leitura e escrita de dados de arquivos com extensão .CSV
+    /// </summary>
     public class CSVHelper
     {
+        /// <summary>
+        /// Método responsável pela leitura do arquivo .CSV
+        /// </summary>
+        /// <param name="path"> Representa o caminho onde o arquivo .CSV está localizado</param>
+        /// <param name="row"> Representa o número da linha onde o dado será lido</param>
+        /// <param name="column"> Representa o nome da coluna onde o dado será lido</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"> Exceção lançada quando a linha ou coluna passada no parâmetro não foi localizada</exception>
         public string GetValueByRowAndColumn(string path, int row, string column)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)

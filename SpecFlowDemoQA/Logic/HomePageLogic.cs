@@ -28,7 +28,7 @@ namespace SpecFlowDemoQA.Logic
         {
             string step = "Verifico o título da pagina";
             IWebElement txtHome = wait.Until(d => d.FindElement(homePage.txtSiteDemoQA));
-            ScreenShotUtil.TakesScreenshot(driver, txtHome, step);
+            driver.TakesScreenshot(step);
 
         }
 
@@ -38,7 +38,7 @@ namespace SpecFlowDemoQA.Logic
             if (txtHome.Displayed)
             {
                 string step = "Valido a home Page";
-                ScreenShotUtil.TakesScreenshot(driver, txtHome, step);
+                driver.TakesScreenshot(step);
                 Assert.True(txtHome.Displayed);
             }
             
