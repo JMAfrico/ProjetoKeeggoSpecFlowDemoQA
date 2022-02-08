@@ -1,5 +1,4 @@
-﻿
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using SpecFlowDemoQA.Fixture;
 using SpecFlowDemoQA.Logic;
 
@@ -17,21 +16,17 @@ namespace SpecFlowDemoQA.StepDefinitions
             carrinhoLogic = new CarrinhoLogic(fixture);
         }
 
-
         [When(@"digito o nome do livro Speaking JavaScript")]
         public void WhenDigitoONomeDoLivroSpeakingJavaScript()
         {
             carrinhoLogic.DigitoONomeDoLivro();
         }
 
-
-
         [When(@"clico no livro")]
         public void WhenClicoNoLivro()
         {
             carrinhoLogic.ClicoNoLivro();
         }
-
 
         [When(@"clico em adicionar a minha colecao")]
         public void WhenClicoEmAdicionarAMinhaColecao()
@@ -68,7 +63,5 @@ namespace SpecFlowDemoQA.StepDefinitions
         {
             carrinhoLogic.ClicarBtnProfile();
         }
-
-
     }
 }

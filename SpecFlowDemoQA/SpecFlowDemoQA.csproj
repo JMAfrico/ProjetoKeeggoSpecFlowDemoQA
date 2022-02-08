@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Evidences\" />
-    <Folder Include="Evidences\07-02-2022\Passed\" />
     <Folder Include="Screenshoots\" />
   </ItemGroup>
 

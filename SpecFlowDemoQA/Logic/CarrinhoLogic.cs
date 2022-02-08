@@ -1,9 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SpecFlowDemoQA.Fixture;
-using SpecFlowDemoQA.Helpers;
 using SpecFlowDemoQA.Pages;
 using SpecFlowDemoQA.Utils;
+
 
 namespace SpecFlowDemoQA.Logic
 {
@@ -81,6 +81,7 @@ namespace SpecFlowDemoQA.Logic
         {
             string step = "clico no botão 'Profile'";
             IWebElement btnProfile = wait.Until(d => d.FindElement(carrinhoPage.BtnProfile));
+            Thread.Sleep(3000);
             js.ExecuteScript("arguments[0].scrollIntoView(true);", btnProfile);
             driver.TakesScreenshot(step);
             btnProfile.Click();
@@ -96,13 +97,13 @@ namespace SpecFlowDemoQA.Logic
                 string textoDoAlerta = alerta.Text;
                 Assert.Equal(TextoEsperadoDoAlerta, textoDoAlerta);
                 alerta.Accept();
-            }
+            } 
             driver.TakesScreenshot(step);
         }
 
         public void ClicarRemoverLivroDoCarrinho()
         {
-            string step = "clico no remover livro";
+            string step = "clico no botão 'remover livro'";
             IWebElement btnRemover = wait.Until(d => d.FindElement(carrinhoPage.BtnRemoverDoCarrinho));
             driver.TakesScreenshot(step);
             btnRemover.Click();
@@ -112,6 +113,7 @@ namespace SpecFlowDemoQA.Logic
         {
             string step = "clico em 'OK' de remover livro";
             IWebElement btnRemover = wait.Until(d => d.FindElement(carrinhoPage.BtnConfirmarRemoverDoCarrinho));
+            Thread.Sleep(3000);
             driver.TakesScreenshot(step);
             btnRemover.Click();
         }

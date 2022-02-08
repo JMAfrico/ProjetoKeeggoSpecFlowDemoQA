@@ -23,7 +23,7 @@ Exemplos:
 
 
 @remover_item
-Cenario: remover item no carrinho
+Esquema do Cenario: remover item no carrinho
 
 Dado que navego para pagina inicial
 Quando clico em login

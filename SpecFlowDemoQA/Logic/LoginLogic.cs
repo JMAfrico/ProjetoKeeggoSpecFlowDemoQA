@@ -102,7 +102,7 @@ namespace SpecFlowDemoQA.Logic
         public void PreenchoOPrimeiroNomeDeNovoUsuario()
         {
             string step = "Preencho o 'primeiro nome' do novo usuario";
-            var firstname = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 12, "first_name");
+            var firstname = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 13, "first_name");
             var txtNomeUsuario = wait.Until(e => e.FindElement(loginPage.TxtFirstName));
             txtNomeUsuario.SendKeys(firstname);
             driver.TakesScreenshot(step);
@@ -112,7 +112,7 @@ namespace SpecFlowDemoQA.Logic
         public void PreenchoUltimoNomeDeNovoUsuario()
         {
             string step = "Preencho o 'ultimo nome' do novo usuario";
-            var lastname = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 12, "last_name");
+            var lastname = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 13, "last_name");
             var txtSobrenomeUsuario = wait.Until(e => e.FindElement(loginPage.TxtLastName));
             txtSobrenomeUsuario.SendKeys(lastname);
             driver.TakesScreenshot(step);
@@ -122,7 +122,7 @@ namespace SpecFlowDemoQA.Logic
         public void PreenchoOCampoUserNameDeNovoUsuario()
         {
             string step = "Preencho o 'User Name' do novo usuario";
-            var username = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 12, "usuario");
+            var username = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 13, "usuario");//6 cadastro de usuario invalido //14 novo cadastro
             var txtLastName = wait.Until(e => e.FindElement(loginPage.TxtUser));
             txtLastName.SendKeys(username);
             driver.TakesScreenshot(step);
@@ -132,7 +132,7 @@ namespace SpecFlowDemoQA.Logic
         public void PreenchoOCampoSenhaDeNovoUsuario()
         {
             string step = "Preencho a 'Senha' do novo usuario";
-            var senha = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 12, "senha");
+            var senha = csvHelper.GetValueByRowAndColumn(DataHelper.GetFileCSVCadastro(), 13, "senha");
             var txtSenha = wait.Until(e => e.FindElement(loginPage.TxtSenha));
             txtSenha.SendKeys(senha);
             driver.TakesScreenshot(step);
